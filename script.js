@@ -2,21 +2,24 @@ document.addEventListener("DOMContentLoaded", () => {
     const board = document.getElementById('game-board');
     const scoreDisplay = document.getElementById('score');
     const highScoreDisplay = document.getElementById('highScore');
+    const levelDisplay = document.getElementById('level');
+    
     let score = 0;
+    let level = 1;
     let highScore = localStorage.getItem('highScore') || 0;
     highScoreDisplay.textContent = highScore;
 
-    const colors = ['red', 'blue', 'green', 'yellow', 'purple'];
+    const colors = ['blue', 'navy', 'cyan', 'yellow', 'green', 'red', 'magenta', 'pink', 'orange'];
 
-    // Função para criar o tabuleiro
+    // Function to create the game board
     function createBoard() {
         for (let i = 0; i < 100; i++) {
             const block = document.createElement('div');
             block.classList.add('block');
             block.setAttribute('draggable', true);
             let randomColor = colors[Math.floor(Math.random() * colors.length)];
-            block.style.backgroundColor = randomColor;
             block.dataset.color = randomColor;
+            block.style.backgroundColor = randomColor;
             board.appendChild(block);
 
             block.addEventListener('dragstart', dragStart);
@@ -26,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Funções de Drag and Drop
+    // Drag and drop functions
     let colorBeingDragged, blockBeingDragged, blockBeingReplaced;
 
     function dragStart() {
@@ -55,10 +58,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Função para verificar combinações e eliminar blocos
+    // Function to check for matches and eliminate blocks
     function checkForMatches() {
         let matches = [];
-        // Verificar linhas
+        // Check rows
         for (let i = 0; i < 100; i++) {
             let rowOfThree = [i, i + 1, i + 2];
             let decidedColor = board.children[i].dataset.color;
@@ -75,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
 
-        // Verificar colunas
+        // Check columns
         for (let i = 0; i < 70; i++) {
             let columnOfThree = [i, i + 10, i + 20];
             let decidedColor = board.children[i].dataset.color;
@@ -92,16 +95,18 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
 
-        // Atualizar High Score
+        // Update High Score
         if (score > highScore) {
             highScore = score;
             highScoreDisplay.textContent = highScore;
             localStorage.setItem('highScore', highScore);
         }
 
-        // Nova fase quando todos os blocos forem eliminados
+        // Advance to next level when all blocks are eliminated
         if (matches.length > 0) {
             setTimeout(() => {
+                level++;
+                levelDisplay.textContent = level;
                 board.innerHTML = '';
                 createBoard();
             }, 500);
