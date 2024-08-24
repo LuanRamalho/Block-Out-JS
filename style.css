@@ -3,7 +3,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    height: 100%; /* Updated to ensure full viewport height */
     background-color: #f0f0f0;
     margin: 0;
 }
@@ -28,29 +28,45 @@ body {
 .block {
     width: 50px;
     height: 50px;
-    background-color: #ccc;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
 }
 
-.block[data-color="red"] {
-    background-color: red;
-}
-
+/* Updated block colors */
 .block[data-color="blue"] {
     background-color: blue;
 }
 
-.block[data-color="green"] {
-    background-color: green;
+.block[data-color="navy"] {
+    background-color: navy;
+}
+
+.block[data-color="cyan"] {
+    background-color: cyan;
 }
 
 .block[data-color="yellow"] {
     background-color: yellow;
 }
 
-.block[data-color="purple"] {
-    background-color: purple;
+.block[data-color="green"] {
+    background-color: green;
+}
+
+.block[data-color="red"] {
+    background-color: red;
+}
+
+.block[data-color="magenta"] {
+    background-color: magenta;
+}
+
+.block[data-color="pink"] {
+    background-color: pink;
+}
+
+.block[data-color="orange"] {
+    background-color: orange;
 }
